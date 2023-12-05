@@ -23,9 +23,10 @@ Nous encourageons les contributions à ce dépôt. Si vous avez des ressources o
 
 ## Contact
 
-Pour toute question ou suggestion, veuillez nous contacter à l'adresse suivante :
+Pour toute question ou suggestion, veuillez nous contacter aux adresses suivantes :
 
 [darylnoupik@gmail.com]
+[yvessyapze@gmail.com]
 
 ## Exemple de contenu
 
