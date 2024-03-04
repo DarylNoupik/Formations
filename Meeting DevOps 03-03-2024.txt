@@ -1,0 +1,15 @@
+Meeting DevOps 03-032-2024
+
+
+
+- Correction du projet Docker 
+- Document de synthese de comprehension
+- Formation de Kubernetes(2 semaines)
+- Formation sur l'automatisation des Tests Front(Selenium ou playride)
+		Automatisation des tests back(Postman ou karate)
+		(2 semaines)
+- Jenkins
+- Ansible
+
+
+
