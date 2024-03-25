@@ -1,0 +1,222 @@
+= Guide Dokcer
+Yves Guerard Syapze Danga <yves.syapze@2025.ucac-icam.com>
+Mars 1, 2024
+:toc:
+:icons: font
+
+
+Ce guide vous presente:
+
+. Docker c'est quoi?
+. Les avantages de docker
+. L'Architecture de docker 
+. Les notions essentielles de Docker
+
+
+== Mise en situation
+
+Dans un village côtier, Marie et Éric, se lancent dans des aventures passionnantes de Jardin et de Peche.
+
+Marie, jardinière, cultive des légumes dans son jardin , en utilisant des méthodes de jardinage fastidueuse et exploitant enormement de ressources(de l'eau et son precieux temps). Son jardin est magnifique, mais elle se tue a maintenir ses plantes en vie.
+
+Éric, un pêcheur expérimenté, s'en va en mer sur son vieux bateau pour pecher du poisson. Confiant il realise toujours de bonne prise avec son bateau qui commence a s'endommager.
+
+Un jour, un problème survient Marie et Eric se retrouve dans un probleme particulier. La sécheresse, mettant Marie en larme pour son jardin et  Éric rencontrant des difficultés desormais lorsqu'il se rend en mer avec son bateau amoche.
+
+Un beau jour, leurs amis, Daryl vient avec une solution innatendue, Docker.
+
+Marie décide d'adopter Docker pour son jardin, en créant des zones d'irrigation goutte à goutte efficaces qui utilisent moins d'eau tout en nourrissant ses plantes. Pendant ce temps, Éric utilise Docker pour isoler les zones endommagées de son bateau, lui permettant de continuer à naviguer en toute sécurité pendant qu'il effectue les réparations nécessaires.
+
+Docker devient le héros inattendu, Marie et Éric découvrent comment optimiser leurs ressources et améliorer leur efficacité. Le jardin de Marie prospère avec moins d'eau utilisée, tandis qu'Éric navigue en mer en toute confiance, sachant qu'il peut compter sur une gestion efficace des ressources de son bateau.
+
+
+== Introduction
+
+Docker est un logiciel de virtualisation leger et libre perrmettant d'empaquetter une application et ses dependances de facon isole et pouvant s'excecuter sur n'importe quel serveur.
+[https://docs.docker.com/get-started/overview/] (Docker)
+
+
+== Presentation de Docker 
+
+Docker est une plateforme ouverte pour développer, expédier et exécuter des applications. Docker permet de séparer des applications de  l'infrastructure afin de fournir des logiciels rapidement, ceci grace a l'aide des conteneurs. 
+
+Un conteneur est un instance d'execution isolée, de facon a exceuter chaque service d'une application de facon independante. elle se base sur la virtualisation LXC(Linux Container) qui a pour principe de faire tourner des environnements linux isolés les uns des autres.
+Contrairement aux machines virtuelles, qui virtualisent tout un système d'exploitation, les conteneurs virtualisent uniquement l'environnement d'exécution de l'application, en partageant le noyau du système d'exploitation sous-jacent avec d'autres conteneurs.
+
+=== Architecture Docker
+
+image::dockervm.jpg[]
+
+L'architecture de Docker est basée sur une approche client-serveur qui comprend plusieurs composants interagissant les uns avec les autres pour gérer les conteneurs et les images Docker. Quelques principaux composants:
+
+- *Client Docker* : Le client Docker est l'interface en ligne de commande (CLI) utilisée par les utilisateurs pour interagir avec Docker.
+
+- *Docker Daemon* : Le daemon Docker est un processus en arrière-plan qui gère la création, l'exécution et la gestion des conteneurs Docker. Il écoute les commandes du client Docker via l'API Docker et s'occupe des opérations telles que le démarrage, l'arrêt, la construction et le transfert d'images Docker.
+
+- *Images Docker* : Les images Docker sont des modèles utilisés pour créer des conteneurs. Elles contiennent le système de fichiers de l'application, ses dépendances, ses configurations et les instructions pour exécuter l'application. Les images Docker sont partagées et réutilisées via Docker Hub.
+
+
+L'architecture de Docker repose sur une approche de virtualisation légère appelée virtualisation par conteneur. Comparée à l'architecture des VM nous avons quelques differences:
+
+
+- Docker utilise une seule instance du système d'exploitation hôte, partagée entre tous les conteneurs. Chaque conteneur exécute son propre processus isolé.
+
+- Les machines virtuelles utilisent une virtualisation matérielle pour créer des environnements isolés, où chaque VM exécute son propre système d'exploitation invité.
+
+- Les machines virtuelles sont moins portables que les conteneurs Docker, car elles sont étroitement liées au matériel.
+
+
+== Guide d'installation
+
+image::docker.png[]
+
+
+=== Prérequis
+
+Avant de pouvoir installer Docker, vous devez vous assurer que l'ordianateur hôte répond aux prérequis :
+
+- Version 3.10 ou supérieure du noyau Linux. 
+- git Version 1.7 ou supérieure.
+- Disposez d'un compte Docker Hub.
+
+NOTE: Comme Docker est conçu pour les systèmes Linux, vous avez également besoin d’un logiciel de virtualisation comme WSL 2. WSL 2 est un sous-système Windows gratuit pour Linux qui vous permet d’utiliser des applications Linux sous Windows.
+
+
+==== Installation Windows & MacOS
+
+Via le lien suivant, vous n'aurez qu'a choisir dans le menu deroulant la version correspondant a votre systeme:
+https://www.docker.com/products/docker-desktop/
+
+- Lancez l'excecutable et suivez la procedure d'installation.
+
+==== Installation Linux
+
+- Accedez au lien suivant: https://docs.docker.com/desktop/install/linux-install/ ;
+
+- Choisissez la plate forme d'installation vous correspondant;
+- Suivez les etapes de requete tel que definies dans la documentation;
+- Excecutez Docker;
+
+
+== Concepts clés de Docker
+
+=== Le docker Hub
+
+Le docker Hub un registre de contenu ou sont stockes les images Docker. 
+Il permet:
+
+- A des développeurs de distribuer des images prêtes à l’emploi et de les versionner avec un système de tags ;
+- A des outils d’intégration en continu de jouer une suite de tests, sans avoir besoin d’autre chose que de Docker ;
+- à des systèmes automatisés de déployer ces applications sur vos environnements de développement et de production
+
+Pour recuperer une image depuis le Docker Hub et pouvoir l'utiliser, il suffit de lancer la commande suivante:
+
+```
+$ docker pull <image_name>
+```
+
+En lançant cette commande, vous téléchargez une image directement depuis le Docker Hub, et vous la stockez en local sur votre ordinateur.
+
+=== Une Image
+
+Une image Docker est un modele de fichiers isolé contenant tout le necessaire pour executer une application. Cela inclut les dependances, le code, et les bibliotheques systemes les variables d'environnement et les configurations. Nous obtenons donc grace aux images un environnement coherent permettant a une application de s'excecuter sur n'importe quelle plateforme prenant en charge Docker
+
+Les images docker reposent sur differents points clés tel que :
+
+- La modularité : Une image peut etre combinée a une autre pour creer des environnements personnalisable et sans probleme de stabilité. 
+
+- immuabilité : Une image apres sa creation reste inchangée,  pouvant permettre une reproductibilité.
+
+En plus de pouvoir obtenir une image sur docker via le Docker Hub, nous pouvons creer nos propres images personnalisées via des Dockerfiles
+
+=== Dockerfile
+
+Un Dockerfile est un fichier docker composé de series d'instructions, nous permettant de creer une image docker. Les avantages de disposer de ce type de fichier pour la creation de nos images sont:
+
+- La personnalisation: Grace a un Dockerfile nous pouvons personnalisé notre image en incluant les dependances liées a notre application.
+
+- Automatisation : En ddisposant d'un dockerfile, nous pouvons automatiser les processus de creation d'une image de maniere rapide et efficace pour accelerer le cycle de developpement'
+
+- Controle de version : Les dockerfiles peuvent etre a l'aide d'un systeme de controle de version comme nous les connaissons(Git).
+
+Le dockerfile est comparable a une recette de cuisine decrivant une image. Chaque instructions comprises dans le dockerfile correspond a une etape(Layer) de notre recette de cuisine.
+
+Un dockerfile se constitue generalement des elements suivants:
+
+Directive FROM : Spécifie l'image de base à utiliser comme point de départ pour la construction de la recette (de l'image).
+
+Directives RUN : Exécute des commandes dans l'environnement de de l'image, telle que la mise à jour des paquets, etc.
+
+Directive COPY : Copie des fichiers sources depuis le système de fichiers de l'hôte vers l'image.
+
+Directive WORKDIR : Définit le répertoire de travail à utiliser.
+
+Directive EXPOSE : Déclare les ports sur lesquels l'application en cours d'exécution écoute les connexions.
+
+Directive CMD ou ENTRYPOINT : Spécifie la commande par défaut à exécuter lorsque notre recette est complete.
+
+Enfin pour finaliser et contruire notre image, la commande a executer, dans le repertoire ou se situe le dockerfile, est la suivante:
+
+```
+ docker build -t <image_name>.
+
+```
+
+-t <image_name> Nous permet ici de donner un nom a notre image
+
+
+=== Conteneur
+
+Un conteneur dans le cadre de docker represente une instance isolée en cours d'excecution. Il permet de virtualiser l'environnement d'excecution de l'application en isolant le processus(l'instance) et les ressources de facon legere permettant un gain en performance.
+
+Un conteneur Docker se cree suite a l'execution d'une image.
+
+```
+ docker run <image_name>.
+```
+
+Pour toujours faire de l'analogie avec de la cuisine, un conteneur, lorsque nous avons notre recette(Dockerfile), nous decidons de la construire. A la suite nous obtenons un plat a servir contenant toutes les dependances (ingredients) necessaires et pret a etre servi (Conteneur).
+
+Pour consulter si notre conteneur est bien lancé, nous pouvons executer la commande:
+
+```
+$ docker ps
+```
+
+Enfin lorsque nous avons terminé avec notre conteneur(le plat) il faut le stopper.
+
+```
+# Commande pour stopper un conteneur docker
+
+ docker stop <image_name>.
+```
+
+=== Docker Compose
+
+
+
+
+=== Docker Swarm
+
+
+
+=== Reseau
+
+
+
+=== Volume
+
+
+
+
+
+
+
+== Bonnes pratiques
+
+
+
+
+
+== Conclusion
+
